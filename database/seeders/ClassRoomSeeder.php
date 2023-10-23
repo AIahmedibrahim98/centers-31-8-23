@@ -12,6 +12,6 @@ class ClassRoomSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        
     }
 }

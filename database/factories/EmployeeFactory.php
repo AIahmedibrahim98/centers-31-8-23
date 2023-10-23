@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Branch;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'job_title' => fake()->jobTitle(),
+            'salary' => fake()->randomNumber(5),
+            'hire_date' => fake()->date(),
+            'branch_id' => Branch::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -42,4 +42,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+    public function instractor_courses()
+    {
+        return $this->belongsToMany(Course::class, 'schedules', 'instractor_id', 'course_id');
+    }
+    public function student_courses()
+    {
+        return $this->belongsToMany(Schedule::class, 'student_registers', 'student_id', 'schedule_id');
+    }
 }

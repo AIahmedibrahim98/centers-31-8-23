@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,11 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name'=> fake()->sentence(1),
+            'hours'=> rand(10,80),
+            'price'=> rand(1000,10000),
+            'vendor_id'=> Vendor::inRandomOrder()->first()->id,
+            'category_id'=> Category::inRandomOrder()->first()->id
         ];
     }
 }
