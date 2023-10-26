@@ -32,6 +32,15 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('companies')->name('companies.')->group(function () {
         Route::get('', [CompanyController::class, 'index'])->name('index');
+        Route::get('create', [CompanyController::class, 'create'])->name('create');
+        Route::post('store', [CompanyController::class, 'store'])->name('store');
+
+        Route::delete('delete/{id}', [CompanyController::class, 'delete'])->name('delete');
+
+        Route::get('edit/{id}', [CompanyController::class, 'edit'])->name('edit');
+
+        // Route::put('update/{id}', [CompanyController::class, 'edit'])->name('edit');
+        Route::patch('update/{id}', [CompanyController::class, 'update'])->name('update');
     });
 });
 
