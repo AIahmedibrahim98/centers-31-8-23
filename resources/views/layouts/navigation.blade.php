@@ -21,6 +21,16 @@
                         Companies
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('branches.index')" :active="request()->routeIs('branches.index')">
+                        Branches
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('vendors.index')" :active="request()->routeIs('vendors.index')">
+                        Vendors
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -85,6 +95,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
                 Companies
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('branches.index')" :active="request()->routeIs('branches.index')">
+                branches
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('vendors.index')" :active="request()->routeIs('vendors.index')">
+                vendors
             </x-responsive-nav-link>
         </div>
 

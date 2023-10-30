@@ -42,6 +42,8 @@ class CompanyController extends Controller
             return to_route('companies.index')->with('status', 'New Company Added');
             // return redirect()->route('companies.index');
             // return redirect()->to('/companies');
+            // return redirect()->back();
+            // return back();
         } catch (Exception $e) {
             return to_route('companies.index')->with('status', $e->getMessage());
         }
@@ -61,6 +63,7 @@ class CompanyController extends Controller
         $company = Company::find($id);
         return view('companies.edit', compact('company'));
     }
+
     public function update($id, Request $request)
     {
         $request->validate([
