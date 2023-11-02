@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+    /* function __construct()
+    {
+        $this->middleware('age');
+    } */
     public function index()
     {
 

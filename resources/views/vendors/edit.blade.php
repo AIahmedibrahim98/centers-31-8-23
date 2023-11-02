@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            Edit Branch
+            Edit Vendor
         </h2>
     </x-slot>
 
@@ -10,63 +10,43 @@
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{--  @if ($errors->any())
-                        <div class="bg-red-300 text-red-700 rounded border border-red-500 p-5 m-2">
+                        <div class="p-5 m-2 text-red-700 bg-red-300 border border-red-500 rounded">
                             <ul>
                                 @foreach ($errors->all() as $error)
-                                    <li class="text-red-800 font-bold">{{ $error }}</li>
+                                    <li class="font-bold text-red-800">{{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>
                     @endif --}}
-                    <form method="POST" action="{{ route('branches.update', $branch->id) }}"
-                        class="border rounded-2xl p-2">
+                    <form enctype="multipart/form-data" method="POST" action="{{ route('vendors.update', $vendor->id) }}"
+                        class="p-2 border rounded-2xl">
                         @csrf
                         @method('PATCH')
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-3 gap-4">
                             <div>
                                 <x-input-label for='name'>Name</x-input-label>
-                                <x-text-input value="{{ old('name', $branch->name) }}" class="w-full"
-                                    name='name'></x-text-input>
+                                <x-text-input value="{{ old('name',$vendor->name) }}" class="w-full" name='name'></x-text-input>
                                 @error('name')
                                     <x-input-label for='name'
-                                        class="text-red-800 font-bold">{{ $message }}</x-input-label>
+                                        class="font-bold text-red-800">{{ $message }}</x-input-label>
                                 @enderror
                             </div>
                             <div>
-                                <x-input-label for='location'>location</x-input-label>
-                                <x-text-input value="{{ old('location', $branch->location) }}" class="w-full"
-                                    name='location'></x-text-input>
-                                @error('location')
-                                    <x-input-label for='location'
-                                        class="text-red-800 font-bold">{{ $message }}</x-input-label>
+                                <x-input-label for='logo'>logo</x-input-label>
+                                <input class="mt-2" type="file" name="logo">
+                                @error('logo')
+                                    <x-input-label for='logo'
+                                        class="font-bold text-red-800">{{ $message }}</x-input-label>
                                 @enderror
                             </div>
                             <div>
-                                <x-input-label for='name'>mobile</x-input-label>
-                                <x-text-input value="{{ old('mobile', $branch->mobile) }}" class="w-full"
-                                    name='mobile'></x-text-input>
-                                @error('mobile')
-                                    <x-input-label for='mobile'
-                                        class="text-red-800 font-bold">{{ $message }}</x-input-label>
-                                @enderror
-                            </div>
-                            <div>
-                                <x-input-label for='company_id'>Company</x-input-label>
-                                <select name="company_id">
-                                    <option selected disabled value="">Select Item</option>
-                                    @foreach ($companies as $company)
-                                        {{-- <option {{ $company->id == $branch->company_id  ? 'selected' :''}} value="{{ $company->id }}">{{ $company->name }}</option> --}}
-                                        <option @selected($company == $branch->company) value="{{ $company->id }}">
-                                            {{ $company->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('company_id')
-                                    <x-input-label for='company_id'
-                                        class="text-red-800 font-bold">{{ $message }}</x-input-label>
-                                @enderror
-                            </div>
+                                @if($vendor->logo)
+                                <img class="rounded w-28 h-28"
+                                src="{{ asset('storage/' . $vendor->logo) }}"
+                                alt="">
 
-
+                                @endif
+                            </div>
                         </div>
                         <div class="flex justify-end mt-3">
                             <x-primary-button>

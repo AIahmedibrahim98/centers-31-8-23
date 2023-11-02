@@ -32,9 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
+    // Route::prefix('companies')->middleware('age')->name('companies.')->group(function () {
     Route::prefix('companies')->name('companies.')->group(function () {
         Route::get('', [CompanyController::class, 'index'])->name('index');
-        Route::get('create', [CompanyController::class, 'create'])->name('create');
+        Route::get('create', [CompanyController::class, 'create'])->name('create'); //->middleware('age');
         Route::post('store', [CompanyController::class, 'store'])->name('store');
 
         Route::delete('delete/{id}', [CompanyController::class, 'delete'])->name('delete');
@@ -45,10 +46,10 @@ Route::middleware('auth')->group(function () {
         Route::patch('update/{id}', [CompanyController::class, 'update'])->name('update');
     });
 
-    Route::resource('branches',BranchController::class)->except('show');
+    Route::resource('branches', BranchController::class)->except('show');
     // Route::resource('branches',BranchController::class)->only('show');
     // Route::resource('branches', BranchController::class);
-    
+
     Route::resource('vendors', VendorController::class)->except('show');
 });
 

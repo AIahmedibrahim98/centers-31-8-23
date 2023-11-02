@@ -33,6 +33,8 @@ class VendorController extends Controller
         $request->validate([
             'name' => 'required',
             'logo' => 'required|image|max:2048'
+        ], [
+            'logo.image' => 'لازم تبعت صورة'
         ]);
         try {
             $vendor = new Vendor();
@@ -58,7 +60,8 @@ class VendorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $vendor = Vendor::findOrFail($id);
+        return view('vendors.edit', compact('vendor'));
     }
 
     /**
@@ -66,7 +69,26 @@ class VendorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'logo' => 'nullable|image|max:2048'
+        ], [
+            'logo.image' => 'لازم تبعت صورة'
+        ]);
+        try {
+            $vendor = Vendor::findOrFail($id);
+            $vendor->name =  $request->name;
+            if ($vendor->logo && $request->file('logo')) {
+                Storage::delete($vendor->logo);
+                $vendor->logo = Storage::put('vendor_images', $request->file('logo'));
+            } elseif ($request->file('logo')) {
+                $vendor->logo = Storage::put('vendor_images', $request->file('logo'));
+            }
+            $vendor->save();
+            return to_route('vendors.index')->with('status', 'vendor Updated');
+        } catch (Exception $e) {
+            return to_route('vendors.index')->with('status', $e->getMessage());
+        }
     }
 
     /**

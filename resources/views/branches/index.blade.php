@@ -4,7 +4,10 @@
             Branches
         </h2>
     </x-slot>
-
+    {{-- {{ auth()->id() }} --}}
+    {{-- {{ auth()->user() }} --}}
+    {{-- {{ auth()->user()->name }} --}}
+    {{-- @dump(app\models\User::all()) --}}
     <div class="py-5 p-1 m-3 rounded bg-white">
         <form action="{{ route('branches.index') }}">
             <div class="w-1/2 text-center" style="margin:  0 auto">
