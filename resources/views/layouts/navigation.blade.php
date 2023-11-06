@@ -13,22 +13,22 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('messages.Dashboard') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
-                        Companies
+                        {{ __('messages.Companies') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('branches.index')" :active="request()->routeIs('branches.index')">
-                        Branches
+                        {{ __('messages.Branches') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('vendors.index')" :active="request()->routeIs('vendors.index')">
-                        Vendors
+                        {{ __('messages.Vendors') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -56,7 +56,10 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
-
+                        <x-dropdown-link :href="route('lang',__('messages.k_lang'))">
+                            {{ __('messages.s_lang') }}
+                        </x-dropdown-link>
+                        <hr>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -67,6 +70,8 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+
+
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -91,16 +96,16 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('messages.Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
-                Companies
+                {{ __('messages.Companies') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('branches.index')" :active="request()->routeIs('branches.index')">
-                branches
+                {{ __('messages.Branches') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('vendors.index')" :active="request()->routeIs('vendors.index')">
-                vendors
+                {{ __('messages.Vendors') }}
             </x-responsive-nav-link>
         </div>
 

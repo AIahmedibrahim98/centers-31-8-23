@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VendorController;
 use App\Models\Company;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('lang/{lang}',function($lang){
+    if ($lang == 'en' || $lang == 'ar') {
+       session()->put('lang',$lang);
+       /* app()->setLocale('ar');
+       app()->getLocale();
+       App::setLocale('ar');
+       App::getLocale(); */
+       return back();
+    }else{
+        abort(500);
+    }
+})->name('lang');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

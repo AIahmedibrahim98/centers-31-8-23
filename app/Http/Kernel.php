@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ChangeLang;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -38,11 +39,12 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             // CheckAge::class
+            ChangeLang::class
         ],
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
