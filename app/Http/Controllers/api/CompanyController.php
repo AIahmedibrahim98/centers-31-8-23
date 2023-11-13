@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CompanyCollection;
+use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Exception;
 use Illuminate\Http\Request;
@@ -14,8 +16,8 @@ class CompanyController extends Controller
         // echo "test";
         try {
             $companies = Company::query();
-            if ($request->name) $companies->where('namew', 'like', '%' . $request->name . '%');
-            $result = $companies->get();
+            if ($request->name) $companies->where('name', 'like', '%' . $request->name . '%');
+            $result = CompanyResource::collection($companies->get());
             return $result;
         } catch (Exception $e) {
             return response()->json([
@@ -30,12 +32,14 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return $companies;
+        // return CompanyResource::collection($companies);
+        return new CompanyCollection($companies);
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -65,7 +69,7 @@ class CompanyController extends Controller
         try {
             return response()->json([
                 'status' => 'done',
-                'company' => $company
+                'company' => new CompanyResource($company)
             ]);
         } catch (Exception $e) {
             return response()->json([

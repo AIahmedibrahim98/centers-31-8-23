@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\api\CompanyController;
+use App\Http\Controllers\api\UserAuthController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get("companies/search", [CompanyController::class, 'search']);
 Route::apiResource("companies", CompanyController::class);
+
+
+Route::post('user/register',[UserAuthController::class,'register']);
+Route::post('user/login',[UserAuthController::class,'login']);
+
+Route::get('user/posts',[PostController::class,'index']);

@@ -20,13 +20,14 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
         \App\Models\User::factory(499)->create();
+        \App\Models\Post::factory(1500)->create();
         \App\Models\Company::factory(500)->create();
-        \App\Models\Branch::factory(500)->create();
-        \App\Models\Manager::factory(500)->create();
-        \App\Models\Employee::factory(500)->create();
-        \App\Models\Vendor::factory(500)->create();
-        \App\Models\ClassRoom::factory(500)->create();
-        \App\Models\Course::factory(500)->create();
+        \App\Models\Branch::factory(50)->create();
+        \App\Models\Manager::factory(50)->create();
+        \App\Models\Employee::factory(50)->create();
+        \App\Models\Vendor::factory(50)->create();
+        \App\Models\ClassRoom::factory(50)->create();
+        \App\Models\Course::factory(50)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

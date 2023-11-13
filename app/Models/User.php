@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'api_token'
     ];
 
     /**
@@ -54,5 +55,10 @@ class User extends Authenticatable
     public function student_courses()
     {
         return $this->belongsToMany(Schedule::class, 'student_registers', 'student_id', 'schedule_id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }
