@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             UserSeeder::class,
         ]);
-        \App\Models\User::factory(499)->create();
-        \App\Models\Post::factory(1500)->create();
-        \App\Models\Company::factory(500)->create();
+        \App\Models\User::factory(50)->create();
+        \App\Models\Post::factory(500)->create();
+        \App\Models\Company::factory(50)->create();
         \App\Models\Branch::factory(50)->create();
         \App\Models\Manager::factory(50)->create();
         \App\Models\Employee::factory(50)->create();
@@ -34,9 +34,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        foreach (range(1, 500) as $i) {
+        /*  foreach (range(1, 500) as $i) {
             Manager::find($i)->update(['company_id' => $i]);
             Employee::find($i)->update(['user_id' => $i]);
-        }
+        } */
     }
 }

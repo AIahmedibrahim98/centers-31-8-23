@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->header('api_token')) {
+        /*  if ($request->header('api_token')) {
             $user = User::firstWhere('api_token', $request->header('api_token'));
             if ($user) {
                 return response()->json([
@@ -31,7 +31,12 @@ class PostController extends Controller
                 'status' => 'user login Faild',
                 'message' => 'Need To Login'
             ], 401);
-        }
+        } */
+
+        return response()->json([
+            'status' => 'user posts',
+            'posts' => auth()->user()->posts
+        ]);
     }
 
     /**

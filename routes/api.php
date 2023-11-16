@@ -26,7 +26,10 @@ Route::get("companies/search", [CompanyController::class, 'search']);
 Route::apiResource("companies", CompanyController::class);
 
 
-Route::post('user/register',[UserAuthController::class,'register']);
-Route::post('user/login',[UserAuthController::class,'login']);
+Route::post('user/register', [UserAuthController::class, 'register']);
+Route::post('user/login', [UserAuthController::class, 'login']);
 
-Route::get('user/posts',[PostController::class,'index']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('user/posts', [PostController::class, 'index']);
+});

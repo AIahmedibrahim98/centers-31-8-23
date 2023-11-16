@@ -23,11 +23,13 @@ class UserAuthController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'api_token' => Str::random(32),
+                // 'api_token' => Str::random(32),
             ]);
+            $token = $user->createToken('user')->plainTextToken;
             return response()->json([
                 'status' => 'user created',
-                'user' => $user
+                'user' => $user,
+                'token' => $token
             ]);
         } catch (Exception $e) {
         }
@@ -42,16 +44,17 @@ class UserAuthController extends Controller
         try {
             $user = User::firstWhere('email', $request->email);
             if ($user && Hash::check($request->password, $user->password)) {
-                $user->update(['api_token' => Str::random(32)]);
+                // $user->update(['api_token' => Str::random(32)]);
                 return response()->json([
                     'status' => 'user login',
-                    'api_token' => $user->api_token
+                    // 'api_token' => $user->api_token
+                    'token' => $user->createToken('user')->plainTextToken,
                 ]);
             } else {
                 return response()->json([
                     'status' => 'user login Faild',
                     'message' => 'Password Does not math'
-                ],401);
+                ], 401);
             }
         } catch (Exception $e) {
         }
