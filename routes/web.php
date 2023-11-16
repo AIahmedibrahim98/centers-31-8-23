@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VendorController;
 use App\Models\Company;
@@ -23,15 +25,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('lang/{lang}',function($lang){
+Route::get('lang/{lang}', function ($lang) {
     if ($lang == 'en' || $lang == 'ar') {
-       session()->put('lang',$lang);
-       /* app()->setLocale('ar');
+        session()->put('lang', $lang);
+        /* app()->setLocale('ar');
        app()->getLocale();
        App::setLocale('ar');
        App::getLocale(); */
-       return back();
-    }else{
+        return back();
+    } else {
         abort(500);
     }
 })->name('lang');
@@ -65,6 +67,9 @@ Route::middleware('auth')->group(function () {
     // Route::resource('branches', BranchController::class);
 
     Route::resource('vendors', VendorController::class)->except('show');
+    Route::resource('courses', CourseController::class)->only(['create', 'store']);
+
+    Route::post('subcat', [CategoryController::class, 'get_subs'])->name('subcat');
 });
 
 require __DIR__ . '/auth.php';
